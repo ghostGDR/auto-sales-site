@@ -5,105 +5,291 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AISellr - AI 驱动的销售自动化平台</title>
     <meta name="description" content="24/7 自动化销售、客户沟通、报告生成。让您的业务永不休眠。">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        'heading': ['Poppins', 'sans-serif'],
+                        'body': ['Open Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        },
+                        cta: {
+                            500: '#10b981',
+                            600: '#059669',
+                        }
+                    },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 8s linear infinite',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-20px)' },
-                        }
-                    }
+                        },
+                        gradient: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
                 }
             }
         }
     </script>
+    
     <style>
         body {
-            background: linear-gradient(to bottom, #0f172a, #1e293b);
-            min-height: 100vh;
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+            background-attachment: fixed;
         }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
         .gradient-text {
-            background: linear-gradient(to right, #60a5fa, #c084fc, #f472b6);
+            background: linear-gradient(135deg, #818cf8 0%, #6366f1 50%, #10b981 100%);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: gradient 8s ease infinite;
+        }
+        
+        .glow {
+            box-shadow: 0 0 60px rgba(99, 102, 241, 0.3);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-cta {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4);
+        }
+        
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+        }
+        
+        .pricing-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .pricing-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .pricing-popular {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border: 2px solid rgba(99, 102, 241, 0.5);
+        }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.5);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.8);
         }
     </style>
 </head>
-<body class="text-white antialiased">
+<body class="text-white min-h-screen overflow-x-hidden">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50 glass rounded-2xl px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group cursor-pointer">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
+                    <i data-lucide="bot" class="w-6 h-6 text-white"></i>
+                </div>
+                <span class="text-xl font-heading font-bold gradient-text">AISellr</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#features" class="text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer">功能</a>
+                <a href="#pricing" class="text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer">定价</a>
+                <a href="#" class="text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer">关于</a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a href="#" class="hidden sm:block text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer">登录</a>
+                <a href="#pricing" class="btn-primary px-5 py-2.5 rounded-xl font-medium text-white cursor-pointer">
+                    免费试用
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
-    <section class="relative overflow-hidden px-6 pt-20 pb-32 lg:px-8">
+    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <!-- Background Effects -->
         <div class="absolute inset-0 -z-10">
-            <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/20 rounded-full blur-3xl"></div>
-            <div class="absolute right-0 top-1/4 w-[400px] h-[400px] bg-purple-500/20 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/30 rounded-full blur-[120px] animate-pulse-slow"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cta-500/20 rounded-full blur-[120px] animate-pulse-slow" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-600/10 rounded-full blur-[150px]"></div>
         </div>
 
-        <div class="mx-auto max-w-7xl text-center">
+        <div class="max-w-6xl mx-auto text-center">
             <!-- Badge -->
-            <div class="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-2 mb-8 animate-float">
-                <i class="fas fa-sparkles text-blue-400"></i>
-                <span class="text-sm text-blue-300">🚀 新功能：AI 智能客户分析已上线</span>
+            <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-8 animate-fade-in-up">
+                <i data-lucide="sparkles" class="w-4 h-4 text-primary-400"></i>
+                <span class="text-sm text-primary-300">新功能：AI 智能客户分析已上线</span>
             </div>
 
             <!-- Main Title -->
-            <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold tracking-tight mb-6 animate-fade-in-up" style="animation-delay: 0.1s;">
                 <span class="gradient-text">让 AI 为您销售</span>
                 <br>
                 <span class="text-white">24/7 永不休眠</span>
             </h1>
 
             <!-- Subtitle -->
-            <p class="mx-auto max-w-2xl text-lg md:text-xl text-slate-400 mb-10">
+            <p class="max-w-2xl mx-auto text-lg sm:text-xl text-slate-300 mb-10 animate-fade-in-up" style="animation-delay: 0.2s;">
                 AISellr 是您的智能销售助手，自动寻找客户、进行对话、完成交易。
                 不需要雇佣销售团队，AI 为您的业务全天候工作。
             </p>
 
             <!-- CTA Form -->
-            <form id="emailForm" class="mx-auto max-w-md">
-                <div id="formContent" class="flex flex-col sm:flex-row gap-3">
-                    <input type="email" id="emailInput" placeholder="输入您的邮箱" required
-                        class="flex-1 px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20">
-                    <button type="submit"
-                        class="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:from-blue-500 hover:to-purple-500 transition-all flex items-center justify-center gap-2 group">
-                        免费试用
-                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+            <form id="emailForm" class="max-w-md mx-auto mb-4 animate-fade-in-up" style="animation-delay: 0.3s;">
+                <div id="formContent" class="glass-card rounded-2xl p-2 flex flex-col sm:flex-row gap-2">
+                    <input 
+                        type="email" 
+                        id="emailInput" 
+                        placeholder="输入您的邮箱" 
+                        required
+                        class="flex-1 px-5 py-3 bg-transparent border-none text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 rounded-xl"
+                    >
+                    <button 
+                        type="submit"
+                        class="btn-cta px-6 py-3 rounded-xl font-semibold text-white whitespace-nowrap flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                        免费开始
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </button>
                 </div>
-                <div id="successMessage" class="hidden p-6 rounded-xl bg-green-500/10 border border-green-500/30">
-                    <p class="text-green-400 font-medium">✓ 感谢注册！我们会尽快与您联系。</p>
+                <div id="successMessage" class="hidden glass-card rounded-2xl p-6 text-center">
+                    <div class="w-12 h-12 rounded-full bg-cta-500/20 flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="check" class="w-6 h-6 text-cta-500"></i>
+                    </div>
+                    <p class="text-cta-400 font-medium">感谢注册！我们会尽快与您联系。</p>
                 </div>
             </form>
 
-            <p class="mt-4 text-sm text-slate-500">14天免费试用，无需信用卡</p>
+            <p class="text-sm text-slate-500 animate-fade-in-up" style="animation-delay: 0.4s;">14天免费试用，无需信用卡</p>
 
             <!-- Stats -->
-            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <i class="fas fa-robot text-2xl text-blue-400 mb-2"></i>
-                    <div class="text-3xl font-bold text-white mb-1">10,000+</div>
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 animate-fade-in-up" style="animation-delay: 0.5s;">
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="w-12 h-12 rounded-xl bg-primary-500/20 flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="bot" class="w-6 h-6 text-primary-400"></i>
+                    </div>
+                    <div class="text-3xl font-heading font-bold text-white mb-1">10K+</div>
                     <div class="text-sm text-slate-400">活跃AI代理</div>
                 </div>
-                <div class="text-center">
-                    <i class="fas fa-bolt text-2xl text-blue-400 mb-2"></i>
-                    <div class="text-3xl font-bold text-white mb-1">500万+</div>
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="w-12 h-12 rounded-xl bg-primary-500/20 flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="zap" class="w-6 h-6 text-primary-400"></i>
+                    </div>
+                    <div class="text-3xl font-heading font-bold text-white mb-1">500万+</div>
                     <div class="text-sm text-slate-400">自动化对话</div>
                 </div>
-                <div class="text-center">
-                    <i class="fas fa-globe text-2xl text-blue-400 mb-2"></i>
-                    <div class="text-3xl font-bold text-white mb-1">50+</div>
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="w-12 h-12 rounded-xl bg-primary-500/20 flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="globe" class="w-6 h-6 text-primary-400"></i>
+                    </div>
+                    <div class="text-3xl font-heading font-bold text-white mb-1">50+</div>
                     <div class="text-sm text-slate-400">覆盖国家</div>
                 </div>
-                <div class="text-center">
-                    <i class="fas fa-star text-2xl text-blue-400 mb-2"></i>
-                    <div class="text-3xl font-bold text-white mb-1">98%</div>
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="w-12 h-12 rounded-xl bg-primary-500/20 flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="heart" class="w-6 h-6 text-primary-400"></i>
+                    </div>
+                    <div class="text-3xl font-heading font-bold text-white mb-1">98%</div>
                     <div class="text-sm text-slate-400">客户满意度</div>
                 </div>
             </div>
@@ -111,203 +297,238 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-24 px-6 lg:px-8">
-        <div class="mx-auto max-w-7xl">
+    <section id="features" class="py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">为什么选择 AISellr？</h2>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white mb-4">
+                    为什么选择 <span class="gradient-text">AISellr</span>？
+                </h2>
                 <p class="text-lg text-slate-400 max-w-2xl mx-auto">
                     我们的 AI 代理经过专业训练，能够处理各种销售场景，从初次接触到成交转化。
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-blue-500/30 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-comments text-xl text-blue-400"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="feature-card glass-card rounded-2xl p-8 cursor-pointer">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500/30 to-primary-700/30 flex items-center justify-center mb-5">
+                        <i data-lucide="message-circle" class="w-7 h-7 text-primary-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white mb-2">智能对话</h3>
-                    <p class="text-slate-400">AI 理解客户意图，进行自然流畅的多轮对话，像真人一样交流。</p>
+                    <h3 class="text-xl font-heading font-semibold text-white mb-3">智能对话</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        AI 理解客户意图，进行自然流畅的多轮对话，像真人一样交流，提升客户体验。
+                    </p>
                 </div>
 
-                <div class="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-blue-500/30 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-bullseye text-xl text-blue-400"></i>
+                <!-- Feature 2 -->
+                <div class="feature-card glass-card rounded-2xl p-8 cursor-pointer">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500/30 to-primary-700/30 flex items-center justify-center mb-5">
+                        <i data-lucide="target" class="w-7 h-7 text-primary-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white mb-2">精准获客</h3>
-                    <p class="text-slate-400">自动在各个平台寻找潜在客户，主动发起对话，不错过任何商机。</p>
+                    <h3 class="text-xl font-heading font-semibold text-white mb-3">精准获客</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        自动在各个平台寻找潜在客户，主动发起对话，不错过任何商机，提高转化率。
+                    </p>
                 </div>
 
-                <div class="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-blue-500/30 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-chart-bar text-xl text-blue-400"></i>
+                <!-- Feature 3 -->
+                <div class="feature-card glass-card rounded-2xl p-8 cursor-pointer">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500/30 to-primary-700/30 flex items-center justify-center mb-5">
+                        <i data-lucide="bar-chart-3" class="w-7 h-7 text-primary-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white mb-2">数据分析</h3>
-                    <p class="text-slate-400">实时追踪销售数据，生成详细报告，帮助您优化销售策略。</p>
+                    <h3 class="text-xl font-heading font-semibold text-white mb-3">数据分析</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        实时追踪销售数据，生成详细报告，帮助您优化销售策略，做出数据驱动决策。
+                    </p>
                 </div>
 
-                <div class="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-blue-500/30 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-shield-alt text-xl text-blue-400"></i>
+                <!-- Feature 4 -->
+                <div class="feature-card glass-card rounded-2xl p-8 cursor-pointer">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500/30 to-primary-700/30 flex items-center justify-center mb-5">
+                        <i data-lucide="shield-check" class="w-7 h-7 text-primary-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white mb-2">安全可靠</h3>
-                    <p class="text-slate-400">企业级数据加密，符合 GDPR 标准，保护您和客户的隐私。</p>
+                    <h3 class="text-xl font-heading font-semibold text-white mb-3">安全可靠</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        企业级数据加密，符合 GDPR 标准，保护您和客户的隐私安全。
+                    </p>
                 </div>
 
-                <div class="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-blue-500/30 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-clock text-xl text-blue-400"></i>
+                <!-- Feature 5 -->
+                <div class="feature-card glass-card rounded-2xl p-8 cursor-pointer">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500/30 to-primary-700/30 flex items-center justify-center mb-5">
+                        <i data-lucide="clock" class="w-7 h-7 text-primary-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white mb-2">全天候运行</h3>
-                    <p class="text-slate-400">无需人工值守，AI 代理 24/7 不间断工作，随时响应客户需求。</p>
+                    <h3 class="text-xl font-heading font-semibold text-white mb-3">全天候运行</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        无需人工值守，AI 代理 24/7 不间断工作，随时响应客户需求，永不休眠。
+                    </p>
                 </div>
 
-                <div class="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-blue-500/30 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-users text-xl text-blue-400"></i>
+                <!-- Feature 6 -->
+                <div class="feature-card glass-card rounded-2xl p-8 cursor-pointer">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500/30 to-primary-700/30 flex items-center justify-center mb-5">
+                        <i data-lucide="layers" class="w-7 h-7 text-primary-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white mb-2">多平台覆盖</h3>
-                    <p class="text-slate-400">支持网站、微信、WhatsApp、邮件等多个渠道，统一管理所有对话。</p>
+                    <h3 class="text-xl font-heading font-semibold text-white mb-3">多平台覆盖</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        支持网站、微信、WhatsApp、邮件等多个渠道，统一管理所有对话。
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-24 px-6 lg:px-8 bg-slate-900/50">
-        <div class="mx-auto max-w-7xl">
+    <section id="pricing" class="py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">简单透明的定价</h2>
-                <p class="text-lg text-slate-400 max-w-2xl mx-auto">选择适合您的方案，随时升级或降级，没有隐藏费用。</p>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white mb-4">
+                    简单透明的<span class="gradient-text">定价</span>
+                </h2>
+                <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+                    选择适合您的方案，随时升级或降级，没有隐藏费用。
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
                 <!-- Starter -->
-                <div class="rounded-2xl p-8 bg-white/5 border border-white/10">
+                <div class="pricing-card glass-card rounded-2xl p-8">
                     <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-white">入门版</h3>
-                        <p class="text-sm text-slate-400 mt-1">适合个人创业者和小型团队</p>
+                        <h3 class="text-lg font-heading font-semibold text-white">入门版</h3>
+                        <p class="text-sm text-slate-400 mt-1">适合个人创业者</p>
                     </div>
+                    
                     <div class="mb-6">
-                        <span class="text-4xl font-bold text-white">¥99</span>
+                        <span class="text-4xl font-heading font-bold text-white">¥99</span>
                         <span class="text-slate-400">/月</span>
                     </div>
+                    
                     <ul class="space-y-4 mb-8">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">1 个 AI 销售代理</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">每月 1,000 次对话</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">基础数据分析</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">邮件支持</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">标准响应速度</span>
                         </li>
                     </ul>
-                    <button class="w-full py-3 px-4 rounded-xl bg-white/10 text-white hover:bg-white/20 border border-white/20 font-semibold transition-all">
+                    
+                    <button class="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold transition-all duration-300 border border-white/20 cursor-pointer">
                         开始试用
                     </button>
                 </div>
 
-                <!-- Professional -->
-                <div class="relative rounded-2xl p-8 bg-gradient-to-b from-blue-600/20 to-purple-600/20 border-2 border-blue-500/50">
+                <!-- Professional (Popular) -->
+                <div class="pricing-card pricing-popular rounded-2xl p-8 relative transform md:scale-105">
                     <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-                        <span class="inline-flex items-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-1 text-sm font-medium text-white">
+                        <span class="inline-flex items-center gap-1 bg-gradient-to-r from-primary-500 to-primary-600 px-4 py-1.5 rounded-full text-sm font-medium text-white">
+                            <i data-lucide="star" class="w-4 h-4"></i>
                             最受欢迎
                         </span>
                     </div>
-                    <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-white">专业版</h3>
+                    
+                    <div class="mb-6 mt-2">
+                        <h3 class="text-lg font-heading font-semibold text-white">专业版</h3>
                         <p class="text-sm text-slate-400 mt-1">适合成长型企业</p>
                     </div>
+                    
                     <div class="mb-6">
-                        <span class="text-4xl font-bold text-white">¥299</span>
+                        <span class="text-4xl font-heading font-bold text-white">¥299</span>
                         <span class="text-slate-400">/月</span>
                     </div>
+                    
                     <ul class="space-y-4 mb-8">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">5 个 AI 销售代理</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">每月 10,000 次对话</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">高级数据分析</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">优先邮件支持</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">快速响应</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">自定义对话流程</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">API 接入</span>
                         </li>
                     </ul>
-                    <button class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:from-blue-500 hover:to-purple-500 transition-all">
+                    
+                    <button class="w-full py-3 px-4 rounded-xl btn-primary font-semibold text-white cursor-pointer">
                         立即升级
                     </button>
                 </div>
 
                 <!-- Enterprise -->
-                <div class="rounded-2xl p-8 bg-white/5 border border-white/10">
+                <div class="pricing-card glass-card rounded-2xl p-8">
                     <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-white">企业版</h3>
-                        <p class="text-sm text-slate-400 mt-1">适合大型企业定制需求</p>
+                        <h3 class="text-lg font-heading font-semibold text-white">企业版</h3>
+                        <p class="text-sm text-slate-400 mt-1">适合大型企业</p>
                     </div>
+                    
                     <div class="mb-6">
-                        <span class="text-4xl font-bold text-white">定制</span>
+                        <span class="text-4xl font-heading font-bold text-white">定制</span>
                     </div>
+                    
                     <ul class="space-y-4 mb-8">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">无限 AI 销售代理</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">无限对话次数</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">专属客户经理</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">7x24 小时支持</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">私有化部署选项</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">定制 AI 训练</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-cta-500 flex-shrink-0"></i>
                             <span class="text-slate-300">SLA 保障</span>
                         </li>
                     </ul>
-                    <button class="w-full py-3 px-4 rounded-xl bg-white/10 text-white hover:bg-white/20 border border-white/20 font-semibold transition-all">
+                    
+                    <button class="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold transition-all duration-300 border border-white/20 cursor-pointer">
                         联系销售
                     </button>
                 </div>
@@ -316,22 +537,26 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-24 px-6 lg:px-8">
-        <div class="mx-auto max-w-4xl">
-            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-600 to-purple-600 p-12 md:p-16 text-center">
-                <div class="absolute inset-0 opacity-20">
-                    <div class="absolute top-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-                    <div class="absolute bottom-0 right-0 w-64 h-64 bg-pink-500 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+    <section class="py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="relative rounded-3xl overflow-hidden">
+                <!-- Background -->
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800"></div>
+                <div class="absolute inset-0 opacity-30">
+                    <div class="absolute top-0 left-0 w-64 h-64 bg-white rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="absolute bottom-0 right-0 w-64 h-64 bg-cta-500 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2"></div>
                 </div>
-
-                <div class="relative z-10">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">准备好让 AI 为您工作了吗？</h2>
-                    <p class="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+                
+                <div class="relative z-10 px-8 py-16 md:px-16 md:py-20 text-center">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-4">
+                        准备好让 AI 为您工作了吗？
+                    </h2>
+                    <p class="text-lg md:text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
                         加入 10,000+ 已经在使用 AISellr 的企业，开始您的 AI 销售之旅。
                     </p>
-                    <a href="#" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-blue-50 transition-colors">
+                    <a href="#pricing" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-700 rounded-xl font-semibold hover:bg-primary-50 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl">
                         免费开始
-                        <i class="fas fa-arrow-right"></i>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </a>
                 </div>
             </div>
@@ -339,32 +564,54 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 lg:px-8 border-t border-white/10">
-        <div class="mx-auto max-w-7xl">
+    <footer class="py-12 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex items-center gap-2">
-                    <span class="text-xl font-bold gradient-text">AISellr</span>
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
+                        <i data-lucide="bot" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <span class="text-xl font-heading font-bold gradient-text">AISellr</span>
                 </div>
 
-                <nav class="flex gap-8">
-                    <a href="#" class="text-slate-400 hover:text-white transition-colors">功能</a>
-                    <a href="#" class="text-slate-400 hover:text-white transition-colors">定价</a>
-                    <a href="#" class="text-slate-400 hover:text-white transition-colors">关于</a>
-                    <a href="#" class="text-slate-400 hover:text-white transition-colors">联系</a>
+                <nav class="flex flex-wrap justify-center gap-6 md:gap-8">
+                    <a href="#features" class="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">功能</a>
+                    <a href="#pricing" class="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">定价</a>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">关于</a>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">联系</a>
                 </nav>
 
-                <p class="text-slate-500 text-sm">© 2025 AISellr. 保留所有权利。</p>
+                <p class="text-slate-500 text-sm">
+                    © 2025 AISellr. 保留所有权利。
+                </p>
             </div>
         </div>
     </footer>
 
+    <!-- Initialize Lucide Icons -->
     <script>
+        lucide.createIcons();
+        
+        // Form submission handler
         document.getElementById('emailForm').addEventListener('submit', function(e) {
             e.preventDefault();
             document.getElementById('formContent').classList.add('hidden');
             document.getElementById('successMessage').classList.remove('hidden');
-            // 这里可以添加实际的邮件收集逻辑
             console.log('Email submitted:', document.getElementById('emailInput').value);
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>
