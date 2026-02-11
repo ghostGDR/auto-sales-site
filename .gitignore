@@ -1,0 +1,8 @@
+# This file instructs GitHub to build your site using Next.js
+
+node_modules/
+.next/
+dist/
+*.log
+.DS_Store
+.env*.local
