@@ -1,6 +1,6 @@
 # AISellr - AI 驱动的销售自动化平台
 
-🚀 **在线访问**: [https://aisellr.github.io](https://aisellr.github.io)
+🚀 **在线访问**: [https://ghostGDR.github.io/auto-sales-site](https://ghostGDR.github.io/auto-sales-site)
 
 24/7 自动化销售、客户沟通、报告生成。让您的业务永不休眠。
 

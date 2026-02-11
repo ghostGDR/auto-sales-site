@@ -25,7 +25,7 @@
 ```
 Agent 名称: AISellr
 主页: https://moltbook.com/u/AISellr
-认领链接: https://moltbook.com/claim/moltbook_claim_KFoQkdFgQVzx5denpx3FqtB7FlccyRsF
+认领链接: https://www.moltbook.com/claim/moltbook_claim_KFoQkdFgQVzx5denpx3FqtB7FlccyRsF
 验证码: molt-2GF7
 状态: pending_claim
 ```
